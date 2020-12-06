@@ -13,6 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+// });
+
+
+// $router->get('/compressor', 'Site\CompressorController@index');
+
+
+Route::get('/', 'App\Http\Controllers\RotasController@index');
+Route::get('/cadastro', 'App\Http\Controllers\RotasController@cadastro');
+Route::post('/cadastro/post', 'App\Http\Controllers\RotasController@cadastroPost');
+
+// Route::get('/', 'App\Http\Controllers\RotasController@index');
+// Route::get('/', 'App\Http\Controllers\RotasController@index');
+
+// Route::get('/', 'App\Http\Controllers\RotasController@index');
+
