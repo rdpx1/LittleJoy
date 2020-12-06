@@ -12,7 +12,7 @@
     <meta name="keywords" content="">
     <meta name="author" content="">
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" media="all">   
     <style>
         #bg_login {
@@ -81,7 +81,7 @@
                 </div>
                 
                <div class="col-12">
-                <form class="py-4">
+                <form class="py-4" action="{{ URL::to('') }}" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="exampleInputNome">Nome do evento</label>
                         <input type="nome" class="form-control" id="exampleInputNome" aria-describedby="nomeHelp">
@@ -112,7 +112,7 @@
 
                     <div class="row">
                         <div class="col-12  text-right">
-                            <a href="" type="submit" class="btn btn-success">Criar evento</a>
+                            <a id="submitEvento" submit" class="btn btn-success">Criar evento</a>
                         </div>
                     </div>     
                 </form>
@@ -127,5 +127,39 @@
     
 
 </body>
+
+
+<script type="text/javascript">
+
+    $("#submitEvento").click(function(){
+
+    let url = "{{ URL::to('/cadastro/evento/post') }}"
+    let formData = new FormData(document.getElementById("cadastro_usuario"));
+        
+        $.ajax({
+            type: 'POST',
+            headers: {'X-CSRF-Token': '{{ csrf_token() }}'},
+            url: url,
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(data) {
+    
+                data = JSON.parse(data);
+                console.log(data);
+
+            if(data['code'] ==  '200'){
+
+            } else { 
+                
+            }
+        },
+        }).fail(function () {
+
+        });
+
+});
+
+</script>
 
 </html>

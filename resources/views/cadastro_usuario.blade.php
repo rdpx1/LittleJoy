@@ -123,10 +123,10 @@
 
 <script type="text/javascript">
 
-$("#submitCadastro").click(function(){
+    $("#submitCadastro").click(function(){
 
-    let url = "{{ URL::to('/cadastro/post') }}"
-    let formData = new FormData(document.getElementById("cadastro_usuario"));
+        let url = "{{ URL::to('/cadastro/usuario/post') }}"
+        let formData = new FormData(document.getElementById("cadastro_usuario"));
             
             $.ajax({
                 type: 'POST',
@@ -141,14 +141,16 @@ $("#submitCadastro").click(function(){
                     console.log(data);
 
                 if(data['code'] ==  '200'){
+
                 } else { 
+
                 }
             },
             }).fail(function () {
 
             });
 
-})
+    });
 
 </script>
 
