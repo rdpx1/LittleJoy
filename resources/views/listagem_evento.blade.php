@@ -51,7 +51,7 @@
                         </li>
                         
                         <li class="nav-item">
-                          <a class="nav-link" href="{{ URL::to('/cadastro_evento') }}">Eventos</a>
+                          <a class="nav-link" href="{{ URL::to('/cadastro/evento') }}">Eventos</a>
                         </li>
 
                         <li class="nav-item dropdown">
