@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" media="all">   
     <style>
         #bg_login {
-            background-image: url('assets/img/bg-login.jpg');
+            background-image: url('img/bg-login.jpg');
             background-position: center ;
             background-repeat: no-repeat;
             background-size: cover;
@@ -39,7 +39,7 @@
             
                 <nav class="navbar navbar-expand-lg bg-light">
                     <a class="navbar-brand" href="#">
-                        <img src="assets/img/logo.svg" style="width:100px;" class="mx-auto d-flex" alt="LittleJoy">
+                        <img src="img/logo.svg" style="width:100px;" class="mx-auto d-flex" alt="LittleJoy">
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-icon"></span>
@@ -51,7 +51,7 @@
                         </li>
                         
                         <li class="nav-item">
-                          <a class="nav-link" href="#">Eventos</a>
+                          <a class="nav-link" href="{{ URL::to('/cadastro_evento') }}">Eventos</a>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -82,7 +82,7 @@
                 
                 <div class="col-12 col-md-4 my-2">
                     <div class="card">
-                        <img src="assets/img/evento.jpg" class="card-img-top" alt="...">
+                        <img src="img/evento.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
                           <h5 class="card-title">Feira de adoção</h5>
                           <p class="card-text">
@@ -97,7 +97,7 @@
 
                 <div class="col-12 col-md-4 my-2">
                     <div class="card">
-                        <img src="assets/img/evento.jpg" class="card-img-top" alt="...">
+                        <img src="img/evento.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
                           <h5 class="card-title">Feira de adoção</h5>
                           <p class="card-text">
@@ -112,7 +112,7 @@
 
                 <div class="col-12 col-md-4 my-2">
                     <div class="card">
-                        <img src="assets/img/evento.jpg" class="card-img-top" alt="...">
+                        <img src="img/evento.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
                           <h5 class="card-title">Feira de adoção</h5>
                           <p class="card-text">

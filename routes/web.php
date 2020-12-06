@@ -21,8 +21,14 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', 'App\Http\Controllers\RotasController@index');
-Route::get('/cadastro', 'App\Http\Controllers\RotasController@cadastro');
-Route::post('/cadastro/post', 'App\Http\Controllers\RotasController@cadastroPost');
+Route::get('/cadastro/usuario', 'App\Http\Controllers\RotasController@cadastroUsuario');
+Route::post('/cadastro/usuario/post', 'App\Http\Controllers\RotasController@cadastroUsuarioPost');
+
+Route::get('/listagem', 'App\Http\Controllers\RotasController@listagem');
+
+
+Route::get('/cadastro/evento', 'App\Http\Controllers\RotasController@cadastroEvento');
+
 
 // Route::get('/', 'App\Http\Controllers\RotasController@index');
 // Route::get('/', 'App\Http\Controllers\RotasController@index');

@@ -19,7 +19,7 @@ class RotasController extends Controller {
     }
 
 
-    public function cadastro(Request $request)
+    public function cadastroUsuario(Request $request)
     {
 
 
@@ -27,7 +27,7 @@ class RotasController extends Controller {
 
     }
 
-    public function cadastroPost(Request $request)
+    public function cadastroUsuarioPost(Request $request)
 
     {
 
@@ -43,6 +43,22 @@ class RotasController extends Controller {
 
 
 
+
+    }
+
+    public function listagem(Request $request)
+    {
+
+
+        return view('listagem_evento');
+
+    }
+
+    public function cadastroEvento(Request $request)
+    {
+
+
+        return view('cadastro_evento');
 
     }
 

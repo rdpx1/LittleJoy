@@ -59,10 +59,10 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-12 col-md-6">
-                                                <a href="listagemInicial.html" type="submit" class="btn btn-success">Entrar na minha conta</a>
+                                                <a href="{{ URL::to('/listagem') }}" type="submit" class="btn btn-success">Entrar na minha conta</a>
                                             </div>
                                             <div class="col-12 col-md-6 text-center">
-                                                <a href="{{ URL::to('/cadastro') }}" class="btn btn-link">Ainda não tenho conta</a>
+                                                <a href="{{ URL::to('/cadastro/usuario') }}" class="btn btn-link">Ainda não tenho conta</a>
                                             </div>
                                         </div>     
                                     </form>
