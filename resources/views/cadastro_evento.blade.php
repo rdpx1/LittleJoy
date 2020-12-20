@@ -12,11 +12,15 @@
     <meta name="keywords" content="">
     <meta name="author" content="">
 
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" media="all">   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
     <style>
         #bg_login {
-            background-image: url('assets/img/bg-login.jpg');
+            background-image: url('/img/bg-login.jpg');
             background-position: center ;
             background-repeat: no-repeat;
             background-size: cover;
@@ -31,14 +35,12 @@
 <body>
 
     
-        
-
     <!-- Conteúdo -->
     <header>
         <div class="container-fluid">
                 <nav class="navbar navbar-expand-lg bg-light">
                     <a class="navbar-brand" href="#">
-                        <img src="assets/img/logo.svg" style="width:100px;" class="mx-auto d-flex" alt="LittleJoy">
+                        <img src="{{URL::asset('img/logo.svg')}}" style="width:100px;" class="mx-auto d-flex" alt="LittleJoy">
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-icon"></span>
@@ -46,11 +48,11 @@
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                       <ul class="navbar-nav ml-auto float-left">
                         <li class="nav-item active">
-                          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                          <a class="nav-link" href="{{ URL::to('/') }}">Home <span class="sr-only">(current)</span></a>
                         </li>
                         
                         <li class="nav-item">
-                          <a class="nav-link" href="#">Eventos</a>
+                          <a class="nav-link" href="{{ URL::to('/listagem') }}">Eventos</a>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -81,29 +83,33 @@
                 </div>
                 
                <div class="col-12">
-                <form class="py-4" action="{{ URL::to('') }}" enctype="multipart/form-data">
+                <form class="py-4" id="f_cadastro_evento" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="exampleInputNome">Nome do evento</label>
-                        <input type="nome" class="form-control" id="exampleInputNome" aria-describedby="nomeHelp">
+                        <input type="nome" name="nome_evento" class="form-control" id="exampleInputNome" aria-describedby="nomeHelp">
                       </div>
                       <div class="form-group">
                         <label for="exampleInputData">Data do evento</label>
-                        <input type="nome" class="form-control" id="exampleInputData" aria-describedby="dataHelp">
+                        <input type="nome" name="data_evento" class="form-control" id="exampleInputData" aria-describedby="dataHelp">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputData">Horário</label>
+                        <input type="nome" name="horario" class="form-control" id="exampleInputData" aria-describedby="dataHelp">
                       </div>
                     <div class="form-group">
                       <label for="exampleInputLocal">Local</label>
-                      <input type="text" class="form-control" id="exampleInputLocal" aria-describedby="localHelp">
+                      <input type="text" name="local" class="form-control" id="exampleInputLocal" aria-describedby="localHelp">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputDescricao">Descrição</label>
-                        <textarea class="form-control" id="exampleInputdescricao"></textarea>
+                        <textarea class="form-control" name="descricao" id="exampleInputdescricao"></textarea>
                     </div>
 
                     <label for="exampleInputDescricao">Cadastrar imagem</label>
                     <div class="input-group mb-3">
                         
                         <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                          <input type="file" class="custom-file-input" name="imagem" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
                           <label class="custom-file-label" for="inputGroupFile01">Escolher imagem</label>
                         </div>
                     </div>
@@ -112,54 +118,88 @@
 
                     <div class="row">
                         <div class="col-12  text-right">
-                            <a id="submitEvento" submit" class="btn btn-success">Criar evento</a>
+                            <a id="submitEvento" submit="" class="btn btn-success" onclick="salvar()">Criar evento</a>
                         </div>
-                    </div>     
+                    </div>
+
+                </form>
+                    <hr>
+                    
+                    <div class="col-12 pb-md-3 mt-md-4" style="padding: 0px;">
+                      <table id="dt_conteudo" class="table table-striped table-bordered font-12" style="width:100%">
+                        <thead>
+                          <tr>
+                            <th>ID Evento</th>
+                            <th>Título</th>
+                            <th>Tipo</th>
+                            <th>Resumo</th>
+                            <th>Ações</th>
+                          </tr>
+                        </thead>
+                        <tbody>                                
+                        </tbody>
+                      </table>
+                  </div>  
+
                 </form>
                </div>
             </div>
         </div>    
     </section>
+  </body>
+</html>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"> </script>
+{{-- 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"> </script>
+<script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script> --}}
 
-
-    
-
-</body>
-
-
+<script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
 
-    $("#submitEvento").click(function(){
+
+
+  function salvar() 
+  {
 
     let url = "{{ URL::to('/cadastro/evento/post') }}"
-    let formData = new FormData(document.getElementById("cadastro_usuario"));
-        
-        $.ajax({
-            type: 'POST',
-            headers: {'X-CSRF-Token': '{{ csrf_token() }}'},
-            url: url,
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function(data) {
-    
-                data = JSON.parse(data);
-                console.log(data);
+    var formData = new FormData(document.getElementById("f_cadastro_evento"));
 
-            if(data['code'] ==  '200'){
 
-            } else { 
+    $.ajax({
+      type: 'POST',
+      headers: {'X-CSRF-Token': '{{ csrf_token() }}'},
+      url: url,
+      data: formData,
+      processData: false,
+      contentType: false,
+      cache: false,
                 
-            }
-        },
-        }).fail(function () {
+      }).done(function (data) {
+        console.log(data);
+        data = JSON.parse(data);
 
+        Swal.fire({
+        icon: 'success',
+        title: "Ok!",
+        text: "O evento foi incluído com sucesso",
+        }).then(function(){
+            // window.location.reload();
         });
 
-});
+      }).fail(function (data) {
+
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Alguma coisa deu errada! Tente novamente!',
+          });
+
+          console.error('AJAX para '+url+' falhou', data);        
+    });
+        
+
+
+
+  }
 
 </script>
-
-</html>

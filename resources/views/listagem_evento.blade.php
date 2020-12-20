@@ -28,11 +28,7 @@
 
 </head>
 
-<body>
-
-    
-        
-
+<body>     
     <!-- Conteúdo -->
     <header>
         <div class="container-fluid">
@@ -47,7 +43,7 @@
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                       <ul class="navbar-nav ml-auto float-left">
                         <li class="nav-item active">
-                          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                          <a class="nav-link" href="{{ URL::to('/') }}">Home <span class="sr-only">(current)</span></a>
                         </li>
                         
                         <li class="nav-item">
@@ -68,7 +64,6 @@
                       </ul>
                     </div>
                   </nav>
-            
         </div>
     </header>
     <section class="main-content bg-faded">

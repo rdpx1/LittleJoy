@@ -44,7 +44,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-10 col-xl-7 mx-auto">
-                                    <img src="assets/img/logo.svg" style="width:100px;" class="mb-5 mx-auto d-flex" alt="LittleJoy">
+                                    <img src="{{URL::asset('img/logo.svg')}}" style="width:100px;" class="mb-5 mx-auto d-flex" alt="LittleJoy">
                                     <h3 class="display-4 pt-4">Olá!</h3>
                                     <p class="text-muted mb-4">Faça seu login abaixo.</p>
 
