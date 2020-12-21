@@ -12,7 +12,7 @@
     <meta name="keywords" content="">
     <meta name="author" content="">
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" media="all">   
     <style>
         #bg_login {
@@ -47,7 +47,7 @@
                         </li>
                         
                         <li class="nav-item">
-                          <a class="nav-link" href="{{ URL::to('/cadastro/evento') }}">Eventos</a>
+                          <a class="nav-link" href="{{ URL::to('/cadastro/evento') }}">Cadastrar Eventos</a>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -74,51 +74,25 @@
                     <h1 class="h3"> Eventos na sua cidade </h1>
                     <small>Eventos perto de você</small>
                 </div>
-                
-                <div class="col-12 col-md-4 my-2">
-                    <div class="card">
-                        <img src="img/evento.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Feira de adoção</h5>
-                          <p class="card-text">
-                              <small>Protetores SCS</small> <br/><br/>
-                              <span><b>Data:</b> 00/00/0000</span> <br/>
-                              <span><b>Local:</b> Praça Getulio Vargas - Santa Cruz do Sul</span> <br/><br/>   
-                          </p>
-                          <a href="#" class="btn btn-warning">Quero participar</a>
-                        </div>
-                      </div>
-                </div>
+
+                @foreach($eventos as $evento)
+
 
                 <div class="col-12 col-md-4 my-2">
-                    <div class="card">
-                        <img src="img/evento.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Feira de adoção</h5>
-                          <p class="card-text">
-                              <small>Protetores SCS</small> <br/><br/>
-                              <span><b>Data:</b> 00/00/0000</span> <br/>
-                              <span><b>Local:</b> Praça Getulio Vargas - Santa Cruz do Sul</span> <br/><br/>   
-                          </p>
-                          <a href="#" class="btn btn-warning">Quero participar</a>
-                        </div>
+                  <div class="card">
+                      <img src="img/evento.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">{{$evento->nome}}</h5>
+                        <p class="card-text">
+                            <span><b>Data:</b> {{$evento->data_evento . " - " . $evento->horario}}</span> <br/>
+                            <span><b>Local:</b> {{$evento->local}}</span> <br/><br/>   
+                        </p>
+                        <a href="#" class="btn btn-warning">Quero participar</a>
                       </div>
-                </div>
+                    </div>
+              </div>
 
-                <div class="col-12 col-md-4 my-2">
-                    <div class="card">
-                        <img src="img/evento.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Feira de adoção</h5>
-                          <p class="card-text">
-                              <small>Protetores SCS</small> <br/><br/>
-                              <span><b>Data:</b> 00/00/0000</span> <br/>
-                              <span><b>Local:</b> Praça Getulio Vargas - Santa Cruz do Sul</span> <br/><br/>   
-                          </p>
-                          <a href="#" class="btn btn-warning">Quero participar</a>
-                        </div>
-                      </div>
-                </div>
+              @endforeach
             </div>
         </div>    
     </section>

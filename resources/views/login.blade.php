@@ -48,6 +48,10 @@
                                     <h3 class="display-4 pt-4">Olá!</h3>
                                     <p class="text-muted mb-4">Faça seu login abaixo.</p>
 
+                                    <p>
+                                        {{ $errors->first('email') }}
+                                        {{ $errors->first('password') }}
+                                    </p>
                                     <form class="py-5">
                                         <div class="form-group">
                                           <label for="exampleInputEmail1">E-mail</label>

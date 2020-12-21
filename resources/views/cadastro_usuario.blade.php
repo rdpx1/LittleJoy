@@ -30,9 +30,6 @@
 
 <body>
 
-    
-    {{-- <form class="py-4" id="f_cadastro_usuario" method="POST"> --}}
-
     <!-- Conteúdo -->
     <section class="main-content">
         <div class="container-fluid">
@@ -50,7 +47,6 @@
                                     <h3 class="display-4 pt-3">Olá!</h3>
                                     <p class="text-muted mb-4">Crie sua conta abaixo</p>
 
-                                    {{-- <form class="py-4" id="cadastro_usuario" action="{{ URL::to('') }}" method="POST"> --}}
                                         <div class="form-group">
                                             <label for="exampleInputNome">Nome completo</label>
                                             <input type="nome" class="form-control" id="exampleInputNome" name="nome" aria-describedby="nomeHelp">
@@ -102,7 +98,7 @@
                                                 <a type="submit" class="btn btn-success" id="submitCadastro" onclick="salvar()">Criar conta</a>
                                             </div>
                                             <div class="col-12 col-md-6 text-center">
-                                                <a href="{{ URL::to('/') }}" class="btn btn-link">Já tenho conta</a>
+                                                <a href="{{ URL::to('/login') }}" class="btn btn-link">Já tenho conta</a>
                                             </div>
                                         </div>     
                                     <div class="text-center d-flex justify-content-between pt-4">

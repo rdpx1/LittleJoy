@@ -8,8 +8,14 @@ use Illuminate\Http\Request;
 use App\Models\Usuario;
 use App\Models\Evento;
 
+use Input;
 use Illuminate\Hashing\BcryptHasher;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Yajra\DataTables\Facades\DataTables;
+
+use Laravel\Fortify\Fortify;
 
 class RotasController extends Controller {
 
@@ -28,11 +34,10 @@ class RotasController extends Controller {
     {
 
 
-
-
         return view('login');
 
     }
+
 
     public function loginPost(Request $request)
     {
@@ -57,10 +62,18 @@ class RotasController extends Controller {
 
     }
 
+    public function cadastroUsuario(Request $request)
+    {
+
+
+
+        return view("cadastro_usuario");
+
+    }
+
     public function cadastroUsuarioPost(Request $request)
 
     {
-        // dd($request->all());
 
         $usuario = new Usuario;
 
@@ -74,7 +87,6 @@ class RotasController extends Controller {
         $usuario->senha = Hash::make($request->senha);
         $usuario->status = "A";
 
-        // dd($usuario->senha);
         $usuario->save();
 
         return json_encode(array('code' => 200, 'msg' => ''));
@@ -84,8 +96,20 @@ class RotasController extends Controller {
     public function listagem(Request $request)
     {
 
+        $eventos = Evento::where('status', 'A')
+            ->select('id_evento', 'nome', 'data_evento', 'horario', 'local', 'descricao')
+            ->get();
 
-        return view('listagem_evento');
+        foreach($eventos as $evento){
+
+            $evento->data_evento = date('d/m/y', strtotime($evento->data_evento));
+        }
+
+        $array = [];
+
+        $array['eventos'] = $eventos;
+
+        return view('listagem_evento', $array);
 
     }
 
@@ -100,8 +124,6 @@ class RotasController extends Controller {
     public function cadastroEventoPost(Request $request)
     {
 
-        dd($request->all());
-
         $evento = new Evento;
 
         $evento->nome = $request->nome_evento;
@@ -110,13 +132,29 @@ class RotasController extends Controller {
         $evento->horario = $request->horario;
         $evento->descricao = $request->descricao;
         $evento->status = 'A';
+        // $evento->imagem = Storage::disk('public')->put('filename', $file_content);
 
         $evento->save();
 
+        
 
         return json_encode(array('code' => 200, 'msg' => ''));
     }
 
+     /**
+     * Datatables
+     * @return Yajra\Datatables\Facades
+     */
+    public function eventoDataTables(Request $request)
+    {
+
+        $query = Evento::where('status', 'A')
+            ->select('id_evento', 'nome', 'data_evento', 'horario', 'local', 'descricao')
+            ->orderBy('id_evento', 'asc');
+
+        return DataTables::eloquent($query)->make(true);
+
+    }
 
 
 

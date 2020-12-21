@@ -34,7 +34,6 @@
 
 <body>
 
-    
     <!-- Conteúdo -->
     <header>
         <div class="container-fluid">
@@ -75,12 +74,11 @@
 
     <section class="main-content bg-faded">
         <div class="container">
-            
-            <div class="row">
-                <div class="col-12 py-5">
-                    <h1 class="h3"> Cadastro de evento </h1>
-                    <small> Cadastros de eventos </small>
-                </div>
+          <div class="row">
+
+              <div class="col-12 py-5">
+                  <h1 class="h3"> Cadastro de evento </h1>
+              </div>
                 
                <div class="col-12">
                 <form class="py-4" id="f_cadastro_evento" enctype="multipart/form-data">
@@ -94,7 +92,7 @@
                       </div>
                       <div class="form-group">
                         <label for="exampleInputData">Horário</label>
-                        <input type="nome" name="horario" class="form-control" id="exampleInputData" aria-describedby="dataHelp">
+                        <input type="nome" name="horario" class="form-control" id="exampleInputHorario" aria-describedby="dataHelp">
                       </div>
                     <div class="form-group">
                       <label for="exampleInputLocal">Local</label>
@@ -107,14 +105,11 @@
 
                     <label for="exampleInputDescricao">Cadastrar imagem</label>
                     <div class="input-group mb-3">
-                        
-                        <div class="custom-file">
+                      <div class="custom-file">
                           <input type="file" class="custom-file-input" name="imagem" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
                           <label class="custom-file-label" for="inputGroupFile01">Escolher imagem</label>
-                        </div>
+                      </div>
                     </div>
-
-                    
 
                     <div class="row">
                         <div class="col-12  text-right">
@@ -123,40 +118,36 @@
                     </div>
 
                 </form>
-                    <hr>
-                    
-                    <div class="col-12 pb-md-3 mt-md-4" style="padding: 0px;">
-                      <table id="dt_conteudo" class="table table-striped table-bordered font-12" style="width:100%">
-                        <thead>
-                          <tr>
-                            <th>ID Evento</th>
-                            <th>Título</th>
-                            <th>Tipo</th>
-                            <th>Resumo</th>
-                            <th>Ações</th>
-                          </tr>
-                        </thead>
-                        <tbody>                                
-                        </tbody>
-                      </table>
-                  </div>  
+              </div>    
 
-                </form>
+              <hr>
+
+                {{-- Datatable --}}
+                <div class="table-responsive col-md-12">
+                  <table id="dt_conteudo" class="table table-striped table-bordered font-12 no-footer" rowClasses="greyRow, whiteRow" style="width:100%">
+                    <thead>
+                      <tr>
+                        <th>ID Evento</th>
+                        <th>Nome</th>
+                        <th>Data Evento</th>
+                        <th>Horário</th>
+                        <th>Local</th>
+                        <th>Descrição</th>
+                      </tr>
+                    </thead>
+                    <tbody>                                
+                    </tbody>
+                  </table>
+                </div>  
+
                </div>
-            </div>
         </div>    
     </section>
   </body>
 </html>
 
-{{-- 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"> </script>
-<script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script> --}}
-
 <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
-
-
 
   function salvar() 
   {
@@ -183,7 +174,7 @@
         title: "Ok!",
         text: "O evento foi incluído com sucesso",
         }).then(function(){
-            // window.location.reload();
+            window.location.reload();
         });
 
       }).fail(function (data) {
@@ -196,10 +187,46 @@
 
           console.error('AJAX para '+url+' falhou', data);        
     });
-        
-
-
-
   }
+
+  $(document).ready(function () {
+        oTable = $('#dt_conteudo').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": "{{URL::to('admin/evento/getDT')}}",
+            "order": [[0, 'desc']],
+            "columns": [
+                {data: 'id_evento', name: 'evento.id_evento'},
+                {data: 'nome', name: 'evento.nome'},
+                {data: 'data_evento', name: 'evento.data_evento'},
+                {data: 'horario', name: 'evento.horario'},
+                {data: 'local', name: 'evento.local'},
+                {data: 'descricao', name: 'evento.descricao'},
+            ],
+            "language": {
+                "sEmptyTable": "Nenhum registro encontrado",
+                "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "_MENU_ resultados por página",
+                "sLoadingRecords": "Carregando...",
+                "sProcessing": "Processando...",
+                "sZeroRecords": "Nenhum registro encontrado",
+                "sSearch": "Pesquisar",
+                "oPaginate": {
+                    "sNext": "Próximo",
+                    "sPrevious": "Anterior",
+                    "sFirst": "Primeiro",
+                    "sLast": "Último"
+                },
+                "oAria": {
+                    "sSortAscending": ": Ordenar colunas de forma ascendente",
+                    "sSortDescending": ": Ordenar colunas de forma descendente"
+                }
+            }
+        });
+    });
 
 </script>
