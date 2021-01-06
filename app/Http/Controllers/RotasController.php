@@ -7,13 +7,15 @@ use Illuminate\Http\Request;
 
 use App\Models\Usuario;
 use App\Models\Evento;
-
+use App\Models\Feedback;
 use Input;
 use Illuminate\Hashing\BcryptHasher;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
+use App\Notifications\WelcomeEmail;
+
 
 use Laravel\Fortify\Fortify;
 
@@ -74,6 +76,7 @@ class RotasController extends Controller {
     public function cadastroUsuarioPost(Request $request)
 
     {
+        // dd($request);
 
         $usuario = new Usuario;
 
@@ -88,6 +91,8 @@ class RotasController extends Controller {
         $usuario->status = "A";
 
         $usuario->save();
+
+        $usuario->notify(new WelcomeEmail());
 
         return json_encode(array('code' => 200, 'msg' => ''));
 
@@ -138,6 +143,7 @@ class RotasController extends Controller {
 
         
 
+
         return json_encode(array('code' => 200, 'msg' => ''));
     }
 
@@ -155,6 +161,34 @@ class RotasController extends Controller {
         return DataTables::eloquent($query)->make(true);
 
     }
+
+    public function confirmarEvento(Request $request)
+    {
+
+
+        dd($request);
+        
+
+
+    }  
+    
+    public function feedbackEvento(Request $request)
+    {
+
+        $feedback = new Feedback();
+        
+        $feedback->id_evento = $request->id_evento;
+        $feedback->descricao_feedback = $request->feedback['value'];
+
+        $feedback->save();
+        
+        return json_encode(array('code' => 200, 'msg' => ''));
+
+
+    }
+
+
+    
 
 
 

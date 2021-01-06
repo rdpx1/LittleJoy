@@ -85,9 +85,17 @@
                         <h5 class="card-title">{{$evento->nome}}</h5>
                         <p class="card-text">
                             <span><b>Data:</b> {{$evento->data_evento . " - " . $evento->horario}}</span> <br/>
-                            <span><b>Local:</b> {{$evento->local}}</span> <br/><br/>   
+                            <span><b>Local:</b> {{$evento->local}}</span> <br/><br/>
+                            <span><b>Descrição</b> {{$evento->descricao}}</span> <br/><br/>   
                         </p>
-                        <a href="#" class="btn btn-warning">Quero participar</a>
+                        <a href="#" class="btn btn-warning" onclick="confirmEvento({{$evento->id_evento}})">Quero participar</a>
+
+                        {{-- @if($data_entrega->lessThan($data_atual);) --}}
+                        {{-- @php($data = \Carbon\Carbon::parse($evento->data_evento)) --}}
+                        
+                        {{-- @if($data->isPast()) --}}
+                        <a href="#" class="btn btn-success" onclick="feedbackEvento({{$evento->id_evento}})">Feedback</a>
+                        {{-- @endif --}}
                       </div>
                     </div>
               </div>
@@ -98,6 +106,8 @@
     </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 
 
     
@@ -105,3 +115,62 @@
 </body>
 
 </html>
+
+
+<script>
+
+  function confirmEvento(id_evento)
+  {
+
+  
+      Swal.fire({
+        icon: 'success',
+        title: "Ok!",
+        text: "Sua presença foi confirmada com sucesso",
+        })
+      
+  }
+
+  function feedbackEvento(id_evento)
+  {
+
+    let url = "{{ URL::to('/evento/feedback') }}"
+
+    const { value: text } = Swal.fire({
+      title: "Feedback",
+      input: 'textarea',
+      inputPlaceholder: 'Digite o seu feedback aqui',
+      inputAttributes: {
+        'aria-label': 'Digite o seu feedback aqui'
+      },
+      showCancelButton: true
+    })
+    .then(value => {
+      if (value && !value.dismiss) {
+        $.ajax({
+            url: url,
+            headers: {'X-CSRF-Token': '{{ csrf_token() }}'},
+            method: 'POST',
+            data: {
+              'feedback': value,
+              'id_evento': id_evento
+            },
+          })
+          .done(function (data) {
+            Swal.fire('Feito!', 'O seu feedback foi recebido!', 'success');
+           })
+          .fail(function (err) {
+            Swal.fire('Opa!', 'Algo deu errado. Por favor, tente novamente.', 'error');
+            console.log(err);
+            });
+      
+      } else {
+          
+          return;
+        }
+      
+      });
+
+  }
+
+</script>

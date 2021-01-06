@@ -24,6 +24,11 @@ Route::post('/cadastro/usuario/post', 'App\Http\Controllers\RotasController@cada
 Route::get('/listagem', 'App\Http\Controllers\RotasController@listagem');
 
 
+Route::post('/evento/confirmar', 'App\Http\Controllers\RotasController@confirmarEvento');
+Route::post('/evento/feedback', 'App\Http\Controllers\RotasController@feedbackEvento');
+
+
+
 Route::get('/cadastro/evento', 'App\Http\Controllers\RotasController@cadastroEvento');
 Route::post('/cadastro/evento/post', 'App\Http\Controllers\RotasController@cadastroEventoPost');
 Route::get('admin/evento/getDT', 'App\Http\Controllers\RotasController@eventoDataTables');
